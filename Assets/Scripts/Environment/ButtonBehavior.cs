@@ -11,7 +11,7 @@ public class ButtonBehavior : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-       mySprite = GameObject.Find("Diamond").GetComponent<SpriteRenderer>();
+       mySprite = GameObject.Find("Button").GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -35,7 +35,5 @@ public class ButtonBehavior : MonoBehaviour {
     private void OnTriggerExit2D(Collider2D collision)
     {
         togglable = false;
-        Debug.Log("Out of trigger zone");
-        Debug.Log(togglable);
     }
 }
