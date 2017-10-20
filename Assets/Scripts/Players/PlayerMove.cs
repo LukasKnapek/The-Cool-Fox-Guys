@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour {
 
 	public float jumpForce = 800f;
 	[HideInInspector] public bool jump = false;
-	public Transform TestPlatform;
+	public Transform PlayerGroundCheck;
 
 	private bool grounded = false;
 	private int groundmask;
@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		grounded = Physics2D.Linecast(transform.position, TestPlatform.position, groundmask);
+		grounded = Physics2D.Linecast(transform.position, PlayerGroundCheck.position, groundmask);
 
 		if (Input.GetButtonDown("Jump") && grounded){
 			jump = true;
