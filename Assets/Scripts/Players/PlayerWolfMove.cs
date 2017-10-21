@@ -19,6 +19,9 @@ public class PlayerWolfMove : MonoBehaviour
     Slider powerBar;
 
     private Rigidbody2D rb2d;
+    private AudioClip jumpSound;
+    private AudioClip walkSound;
+    private AudioSource sound;
 
     // Use this for initialization
     void Awake()
@@ -30,6 +33,9 @@ public class PlayerWolfMove : MonoBehaviour
         if (GameObject.Find("UI"))
             powerBar = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarWolf").GetComponent<Slider>();
         deathParticle = GameObject.Find("DeathParticle").GetComponent<ParticleSystem>();
+        jumpSound = Resources.Load("Audio/SFX/jumping/jump", typeof(AudioClip)) as AudioClip;
+        walkSound = Resources.Load("Audio/SFX/walking/footsteps_dirt", typeof(AudioClip)) as AudioClip;
+        sound = this.GetComponent<AudioSource>();
 
     }
 
@@ -42,6 +48,8 @@ public class PlayerWolfMove : MonoBehaviour
         {
             jump = true;
             powerBar.GetComponent<PowerBarWolf>().decreasePower(0.04f);
+            sound.PlayOneShot(jumpSound);
+
         }
     }
 
@@ -75,6 +83,10 @@ public class PlayerWolfMove : MonoBehaviour
             else
             {
                 rb2d.AddForce(new Vector2(horizontalInput * acceleration, 0), ForceMode2D.Impulse);
+            }
+            if (!sound.isPlaying && grounded)
+            {
+                sound.PlayOneShot(walkSound);
             }
         }
 
