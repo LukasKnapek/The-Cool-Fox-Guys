@@ -28,4 +28,9 @@ public class PowerBarFox : MonoBehaviour
     {
         power -= amount;
     }
+
+    public float getPower()
+    {
+        return power;
+    }
 }

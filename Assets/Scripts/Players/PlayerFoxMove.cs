@@ -8,14 +8,16 @@ public class PlayerFoxMove : MonoBehaviour {
 	public float acceleration = 1f;
 	public float maxSpeed = 5f;
 	public float jumpForce = 800f;
-	[HideInInspector] public bool jump = false;
-	public Transform Player1GroundCheck;
+	[HideInInspector] public bool jump1 = false;
+    [HideInInspector] public bool jump2 = false;
+    public Transform Player1GroundCheck;
 
     private bool grounded = false;
     private int groundmask;
     Animator playerAnim;
     SpriteRenderer mySprite;
     ParticleSystem deathParticle;
+    ParticleSystem powerParticle;
     Slider powerBar;
     
 	private Rigidbody2D rb2d;
@@ -23,8 +25,10 @@ public class PlayerFoxMove : MonoBehaviour {
     private AudioClip walkSound;
     private AudioSource sound;
 
-	// Use this for initialization
-	void Awake ()
+    private bool canDoubleJump = false;
+
+    // Use this for initialization
+    void Awake ()
     {
 		rb2d = GetComponent<Rigidbody2D> ();
 		groundmask = 1 << LayerMask.NameToLayer ("Ground");
@@ -40,20 +44,40 @@ public class PlayerFoxMove : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
-		grounded = Physics2D.Linecast(transform.position, Player1GroundCheck.position, groundmask);
+        grounded = Physics2D.Linecast(transform.position, Player1GroundCheck.position, groundmask);
 
-		if (Input.GetButtonDown("Player1Jump") && grounded){
-			jump = true;
-            powerBar.GetComponent<PowerBarFox>().decreasePower(0.04f);
-            sound.PlayOneShot(jumpSound);
-		}
+        if (Input.GetButtonDown("Player1Jump"))
+        { 
+            if (grounded)
+            {
+                rb2d.AddForce(new Vector2(0f, jumpForce));
+                if (powerBar.GetComponent<PowerBarFox>().getPower() > 0f)
+                {
+                    canDoubleJump = true;
+                }
+                sound.PlayOneShot(jumpSound);
+
+            }
+            else if (canDoubleJump)
+            {
+                rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+                rb2d.AddForce(new Vector2(0f, jumpForce));
+                sound.PlayOneShot(jumpSound);
+                canDoubleJump = false;
+
+                powerBar.GetComponent<PowerBarFox>().decreasePower(0.2f);
+                powerParticle = GameObject.Find("FoxPowerParticle").GetComponent<ParticleSystem>();
+                powerParticle.transform.position = this.transform.position;
+                powerParticle.Play();
+            }
+        }
     }
 
     // Update physics
     void FixedUpdate() {
-		
+
 		if (grounded) {
 			rb2d.gravityScale = 0;
 		} else {
@@ -84,11 +108,8 @@ public class PlayerFoxMove : MonoBehaviour {
 			rb2d.velocity = new Vector2 (Mathf.Sign (rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
 		}
 
-		if (jump){
-			rb2d.AddForce(new Vector2(0f, jumpForce));
-			jump = false;
-		}
-	}
+
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -98,6 +119,10 @@ public class PlayerFoxMove : MonoBehaviour {
             deathParticle.Play();
             Destroy(this.gameObject);
             GameMaster.GM.GameOver();
+        }
+        if (collision.gameObject.tag == "Goal")
+        {
+            GameMaster.GM.Win();
         }
     }
 }

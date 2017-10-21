@@ -10,6 +10,7 @@ public class GameMaster : MonoBehaviour
 
     public Dictionary<string, List<string>> ControlBindings;
     public Image gameOverScreen;
+    public Image winScreen;
     public Text gameOverText;
     public Camera mainCamera;
 
@@ -43,18 +44,37 @@ public class GameMaster : MonoBehaviour
         gameOverScreen.canvasRenderer.SetAlpha(0.0f);
         gameOverScreen.CrossFadeAlpha(1.0f, 2.0f, true);
 
-        gameOverText.enabled = false;
         gameOverText.transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 1f);
         gameOverText.canvasRenderer.SetAlpha(0.0f);
         gameOverText.CrossFadeAlpha(1.0f, 2.0f, true);
 
-        StartCoroutine(Waiter());
+        StartCoroutine(Defeat());
 
     }
 
-    IEnumerator Waiter()
+    public void Win()
     {
-        yield return new WaitForSeconds(3);
+        winScreen = GameObject.Find("UI").GetComponent<Transform>().Find("WinScreen").GetComponent<Image>();
+        mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
+
+        winScreen.enabled = true;
+        winScreen.canvasRenderer.SetAlpha(0.0f);
+        winScreen.CrossFadeAlpha(1.0f, 2.0f, true);
+
+        StartCoroutine(Victory());
+    }
+
+    IEnumerator Defeat()
+    {
+        yield return new WaitForSeconds(2.5f);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+    }
+
+    IEnumerator Victory()
+    {
+        yield return new WaitForSeconds(2.5f);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 

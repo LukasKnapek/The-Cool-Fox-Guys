@@ -33,7 +33,7 @@ public class PlayerWolfMove : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         mySprite = GetComponent<SpriteRenderer>();
         if (GameObject.Find("UI"))
-            powerBar = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarWolf").GetComponent<Slider>();
+        powerBar = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarWolf").GetComponent<Slider>();
         deathParticle = GameObject.Find("DeathParticle").GetComponent<ParticleSystem>();
         jumpSound = Resources.Load("Audio/SFX/jumping/jump", typeof(AudioClip)) as AudioClip;
         walkSound = Resources.Load("Audio/SFX/walking/footsteps_dirt", typeof(AudioClip)) as AudioClip;
@@ -121,6 +121,10 @@ public class PlayerWolfMove : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag == "Danger")
+        {
+            GameMaster.GM.Win();
+        }
         if (collision.gameObject.tag == "Danger")
         {
             deathParticle.transform.position = this.transform.position;
