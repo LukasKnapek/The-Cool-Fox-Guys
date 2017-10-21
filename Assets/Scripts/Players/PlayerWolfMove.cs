@@ -22,6 +22,7 @@ public class PlayerWolfMove : MonoBehaviour
     private AudioClip jumpSound;
     private AudioClip walkSound;
     private AudioSource sound;
+    private Camera mainCamera;
 
     // Use this for initialization
     void Awake()
@@ -36,6 +37,8 @@ public class PlayerWolfMove : MonoBehaviour
         jumpSound = Resources.Load("Audio/SFX/jumping/jump", typeof(AudioClip)) as AudioClip;
         walkSound = Resources.Load("Audio/SFX/walking/footsteps_dirt", typeof(AudioClip)) as AudioClip;
         sound = this.GetComponent<AudioSource>();
+
+
 
     }
 
