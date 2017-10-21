@@ -16,6 +16,7 @@ public class PlayerWolfMove : MonoBehaviour
     Animator playerAnim;
     SpriteRenderer mySprite;
     ParticleSystem deathParticle;
+    ParticleSystem powerParticle;
     Slider powerBar;
 
     private Rigidbody2D rb2d;
@@ -50,7 +51,6 @@ public class PlayerWolfMove : MonoBehaviour
         if (Input.GetButtonDown("Player2Jump") && grounded)
         {
             jump = true;
-            powerBar.GetComponent<PowerBarWolf>().decreasePower(0.04f);
             sound.PlayOneShot(jumpSound);
 
         }
@@ -104,6 +104,20 @@ public class PlayerWolfMove : MonoBehaviour
             jump = false;
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (powerBar.GetComponent<PowerBarWolf>().getPower() <= 0f)
+        {
+            collision.GetComponent<BoxCollider2D>().isTrigger = false;
+        }
+       else if (collision.gameObject.tag == "Barrier")
+        {
+            powerBar.GetComponent<PowerBarWolf>().decreasePower(0.2f);
+            powerParticle = GameObject.Find("WolfPowerParticle").GetComponent<ParticleSystem>();
+            powerParticle.transform.position = this.transform.position;
+            powerParticle.Play();
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -113,6 +127,14 @@ public class PlayerWolfMove : MonoBehaviour
             deathParticle.Play();
             Destroy(this.gameObject);
             GameMaster.GM.GameOver();
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Barrier")
+        {
+            Physics2D.IgnoreCollision(collision.collider, this.GetComponent<Collider2D>(), false);
         }
     }
 }

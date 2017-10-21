@@ -24,7 +24,7 @@ public class LeverScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-
+        /*
         if ((Input.GetButtonDown("Player1Interact") || Input.GetButtonDown("Player2Interact")) && togglable)
         {
             toggled = !toggled;
@@ -52,6 +52,7 @@ public class LeverScript : MonoBehaviour {
             }
             mySprite.sprite = Resources.Load("Sprites/lever_off", typeof(Sprite)) as Sprite;
         }
+        */
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

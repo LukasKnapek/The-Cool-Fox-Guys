@@ -36,5 +36,4 @@ public class DoorScript : MonoBehaviour {
     {
         open = false;
     }
-
 }
