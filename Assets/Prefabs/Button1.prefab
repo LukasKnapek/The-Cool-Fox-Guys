@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4509367518880108}
   - component: {fileID: 212850051456964656}
-  - component: {fileID: 114939971665651054}
-  - component: {fileID: 95554382601710960}
   - component: {fileID: 58869344142390246}
+  - component: {fileID: 95554382601710960}
+  - component: {fileID: 114939971665651054}
   m_Layer: 10
   m_Name: Button1
   m_TagString: Button
@@ -70,7 +70,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: d3ce86606965bdd469c7cc4d04b3ba91, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1

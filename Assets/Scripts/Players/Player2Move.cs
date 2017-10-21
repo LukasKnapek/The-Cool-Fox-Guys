@@ -16,6 +16,7 @@ public class Player2Move : MonoBehaviour
     private int groundmask;
     Animator playerAnim;
     SpriteRenderer mySprite;
+    ParticleSystem deathParticle;
 
     private Rigidbody2D rb2d;
 
@@ -26,6 +27,7 @@ public class Player2Move : MonoBehaviour
         groundmask = 1 << LayerMask.NameToLayer("Ground");
         playerAnim = GetComponent<Animator>();
         mySprite = GetComponent<SpriteRenderer>();
+        deathParticle = GameObject.Find("DeathParticle").GetComponent<ParticleSystem>();
 
     }
 
@@ -82,6 +84,17 @@ public class Player2Move : MonoBehaviour
         {
             rb2d.AddForce(new Vector2(0f, jumpForce));
             jump = false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Danger")
+        {
+            deathParticle.transform.position = this.transform.position;
+            deathParticle.Play();
+            Destroy(this.gameObject);
+            GameMaster.GM.GameOver();
         }
     }
 }
