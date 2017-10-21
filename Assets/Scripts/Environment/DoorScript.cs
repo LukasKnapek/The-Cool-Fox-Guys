@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door1 : MonoBehaviour {
+public class DoorScript : MonoBehaviour {
 
     private bool open = false;
     private SpriteRenderer mySprite;
-    private Collider2D myCollider;
+    private Collider2D myCollider;  
 
     // Use this for initialization
     void Start () {
@@ -27,12 +27,12 @@ public class Door1 : MonoBehaviour {
         }
     }
 
-    public void openDoor()
+    public void makeActive()
     {
         open = true;
     }
 
-    public void closeDoor()
+    public void makeNonActive()
     {
         open = false;
     }
