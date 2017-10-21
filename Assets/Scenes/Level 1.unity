@@ -21099,6 +21099,18 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 516
     m_Data: {fileID: 21300002, guid: fc44fe674b487a845995b9b225bf44b9, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
@@ -21178,7 +21190,7 @@ Tilemap:
   m_AnimationFrameRate: 1
   m_Color: {r: 0.941, g: 0.84413236, b: 0.84413236, a: 1}
   m_Origin: {x: -29, y: -9, z: 0}
-  m_Size: {x: 292, y: 29, z: 1}
+  m_Size: {x: 329, y: 29, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -21231,7 +21243,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4333950489866150, guid: 72ef96893a32339488c9c660b6f2b81a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -18.708797
+      value: 28.05
       objectReference: {fileID: 0}
     - target: {fileID: 4333950489866150, guid: 72ef96893a32339488c9c660b6f2b81a, type: 2}
       propertyPath: m_LocalPosition.y
@@ -21439,7 +21451,8 @@ GameObject:
   - component: {fileID: 675535377}
   - component: {fileID: 675535379}
   - component: {fileID: 675535378}
-  m_Layer: 0
+  - component: {fileID: 675535380}
+  m_Layer: 9
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25802,6 +25815,19 @@ Tilemap:
   m_TileRefreshArray:
   - serializedVersion: 1
     m_DirtyIndex: 0
+--- !u!19719996 &675535380
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 675535376}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
 --- !u!4 &716121758 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4613767332165894, guid: 59ca95b31f55be24887b49fc8c9f52e5,
@@ -27670,7 +27696,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4718272019405950, guid: ff54a14530346a54bad0323e9541815f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -20.12046
+      value: 26.9
       objectReference: {fileID: 0}
     - target: {fileID: 4718272019405950, guid: ff54a14530346a54bad0323e9541815f, type: 2}
       propertyPath: m_LocalPosition.y
