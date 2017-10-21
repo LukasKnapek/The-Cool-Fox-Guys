@@ -19,11 +19,11 @@ public class DoorScript : MonoBehaviour {
         if (open)
         {
             myCollider.isTrigger = true;
-            mySprite.color = new Color(0.5f, 0.25f, 0.25f, 0);
+            mySprite.enabled = false;
         }
         else {
             myCollider.isTrigger = false;
-            mySprite.color = new Color(0.5f, 0.25f, 0.25f, 255);
+            mySprite.enabled = true;
         }
     }
 
