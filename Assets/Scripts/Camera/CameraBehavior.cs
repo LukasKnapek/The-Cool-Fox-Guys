@@ -6,7 +6,7 @@ public class CameraBehavior : MonoBehaviour {
 
     private GameObject player;
     private Transform playerTransform;
-    private float yOffset = 2.5f;
+    private float yOffset = 0f;
 
     // Use this for initialization
 
