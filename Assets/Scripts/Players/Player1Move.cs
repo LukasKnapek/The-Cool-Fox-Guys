@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour {
+public class Player1Move : MonoBehaviour {
 
 	public float acceleration = 1f;
 	public float maxSpeed = 5f;
 
 	public float jumpForce = 800f;
 	[HideInInspector] public bool jump = false;
-	public Transform PlayerGroundCheck;
+	public Transform Player1GroundCheck;
 
 	private bool grounded = false;
 	private int groundmask;
@@ -24,9 +24,9 @@ public class PlayerMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		grounded = Physics2D.Linecast(transform.position, PlayerGroundCheck.position, groundmask);
+		grounded = Physics2D.Linecast(transform.position, Player1GroundCheck.position, groundmask);
 
-		if (Input.GetButtonDown("Jump") && grounded){
+		if (Input.GetButtonDown("Player1Jump") && grounded){
 			jump = true;
 		}
 	}
@@ -41,7 +41,7 @@ public class PlayerMove : MonoBehaviour {
 		}
 
 
-		float horizontalInput = Input.GetAxisRaw("Horizontal");
+		float horizontalInput = Input.GetAxisRaw("Player1Horizontal");
 
 		if (horizontalInput != 0 && Mathf.Abs(rb2d.velocity.x) < maxSpeed) {
 			if (horizontalInput * acceleration >= maxSpeed) {
