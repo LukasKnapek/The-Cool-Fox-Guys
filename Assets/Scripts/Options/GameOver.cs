@@ -17,5 +17,10 @@ public class GameOver : MonoBehaviour {
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            Debug.Log("Return to menu requested");
+            SceneManager.LoadScene("Menu");
+        }
     }
 }
