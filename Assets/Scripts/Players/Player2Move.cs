@@ -10,10 +10,12 @@ public class Player2Move : MonoBehaviour
 
     public float jumpForce = 800f;
     [HideInInspector] public bool jump = false;
-    public Transform Player1GroundCheck;
+    public Transform Player2GroundCheck;
 
     private bool grounded = false;
     private int groundmask;
+    Animator playerAnim;
+    SpriteRenderer mySprite;
 
     private Rigidbody2D rb2d;
 
@@ -22,12 +24,15 @@ public class Player2Move : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         groundmask = 1 << LayerMask.NameToLayer("Ground");
+        playerAnim = GetComponent<Animator>();
+        mySprite = GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        grounded = Physics2D.Linecast(transform.position, Player1GroundCheck.position, groundmask);
+        grounded = Physics2D.Linecast(transform.position, Player2GroundCheck.position, groundmask);
 
         if (Input.GetButtonDown("Player2Jump") && grounded)
         {
@@ -50,6 +55,11 @@ public class Player2Move : MonoBehaviour
 
 
         float horizontalInput = Input.GetAxisRaw("Player2Horizontal");
+        if (horizontalInput > 0)
+            mySprite.flipX = false;
+        else if (horizontalInput < 0)
+            mySprite.flipX = true;
+        playerAnim.SetFloat("Walking", horizontalInput);
 
         if (horizontalInput != 0 && Mathf.Abs(rb2d.velocity.x) < maxSpeed)
         {
