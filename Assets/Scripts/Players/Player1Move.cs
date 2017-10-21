@@ -10,6 +10,8 @@ public class Player1Move : MonoBehaviour {
 	public float jumpForce = 800f;
 	[HideInInspector] public bool jump = false;
 	public Transform Player1GroundCheck;
+    Animator playerAnim;
+    SpriteRenderer mySprite;
 
 	private bool grounded = false;
 	private int groundmask;
@@ -20,6 +22,8 @@ public class Player1Move : MonoBehaviour {
 	void Awake () {
 		rb2d = GetComponent<Rigidbody2D> ();
 		groundmask = 1 << LayerMask.NameToLayer ("Ground");
+        playerAnim = GetComponent<Animator>();
+        mySprite = GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
@@ -42,6 +46,13 @@ public class Player1Move : MonoBehaviour {
 
 
 		float horizontalInput = Input.GetAxisRaw("Player1Horizontal");
+
+        if (horizontalInput > 0)
+            mySprite.flipX = false;
+        else if (horizontalInput < 0)
+            mySprite.flipX = true;
+
+        playerAnim.SetFloat("Walking", horizontalInput);
 
 		if (horizontalInput != 0 && Mathf.Abs(rb2d.velocity.x) < maxSpeed) {
 			if (horizontalInput * acceleration >= maxSpeed) {
