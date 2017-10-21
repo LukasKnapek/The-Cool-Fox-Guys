@@ -28,7 +28,7 @@ public class PlayerWolfMove : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         mySprite = GetComponent<SpriteRenderer>();
         if (GameObject.Find("UI"))
-            powerBar = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarFox").GetComponent<Slider>();
+            powerBar = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarWolf").GetComponent<Slider>();
         deathParticle = GameObject.Find("DeathParticle").GetComponent<ParticleSystem>();
 
     }
