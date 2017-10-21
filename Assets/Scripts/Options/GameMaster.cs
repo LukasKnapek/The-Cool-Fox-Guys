@@ -23,7 +23,8 @@ public class GameMaster : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         ControlBindings = new Dictionary<string, List<string>>
         {
-            {"Button1", new List<string>() {"Door1"} }
+            { "Button1", new List<string>() {"Door1", "Door2"} },
+            { "Lever1", new List<string>() }
         };
 
     }
