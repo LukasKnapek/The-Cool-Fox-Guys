@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player1Move : MonoBehaviour {
 
@@ -12,7 +13,8 @@ public class Player1Move : MonoBehaviour {
 	public Transform Player1GroundCheck;
     Animator playerAnim;
     SpriteRenderer mySprite;
-
+    Slider powerBar;
+    
 	private bool grounded = false;
 	private int groundmask;
 
@@ -24,6 +26,7 @@ public class Player1Move : MonoBehaviour {
 		groundmask = 1 << LayerMask.NameToLayer ("Ground");
         playerAnim = GetComponent<Animator>();
         mySprite = GetComponent<SpriteRenderer>();
+        powerBar = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBar").GetComponent<Slider>();
 	}
 	
 	// Update is called once per frame
@@ -32,11 +35,12 @@ public class Player1Move : MonoBehaviour {
 
 		if (Input.GetButtonDown("Player1Jump") && grounded){
 			jump = true;
+            powerBar.GetComponent<PowerBar>().decreasePower(0.04f);
 		}
-	}
+    }
 
-	// Update physics
-	void FixedUpdate() {
+    // Update physics
+    void FixedUpdate() {
 		
 		if (grounded) {
 			rb2d.gravityScale = 0;
