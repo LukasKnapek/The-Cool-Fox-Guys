@@ -28,27 +28,32 @@ public class ButtonScript : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if (Input.GetButtonDown("Player1Interact") && togglable)
+        if ((Input.GetButtonDown("Player1Interact") || Input.GetButtonDown("Player2Interact")) && togglable)
         {
             toggled = !toggled;
         }
 
         if (toggled)
         {
-            mySprite.color = new Color(0, 255, 0);
             foreach (Transform controlledObject in controlledObjects)
             {
-                controlledObject.GetComponent<DoorScript>().makeActive();
+                if (controlledObject.name.Contains("Door"))
+                {
+                    controlledObject.GetComponent<DoorScript>().makeActive();
+                }
             }
-            
+            mySprite.sprite = Resources.Load("Sprites/button_on", typeof(Sprite)) as Sprite;
         }
         else
         {
-            mySprite.color = new Color(255, 0, 0);
             foreach (Transform controlledObject in controlledObjects)
             {
-                controlledObject.GetComponent<DoorScript>().makeNonActive();
+                if (controlledObject.name.Contains("Door"))
+                {
+                    controlledObject.GetComponent<DoorScript>().makeNonActive();
+                };
             }
+            mySprite.sprite = Resources.Load("Sprites/button_off", typeof(Sprite)) as Sprite;
         }
     }
 

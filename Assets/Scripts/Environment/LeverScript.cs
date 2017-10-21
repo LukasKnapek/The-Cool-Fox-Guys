@@ -34,7 +34,10 @@ public class LeverScript : MonoBehaviour {
         {
             foreach (Transform controlledObject in controlledObjects)
             {
-                controlledObject.GetComponent<DoorScript>().makeActive();
+                if (controlledObject.name.Contains("Door"))
+                {
+                    controlledObject.GetComponent<DoorScript>().makeActive();
+                }
             }
             mySprite.sprite = Resources.Load("Sprites/lever_on", typeof(Sprite)) as Sprite;
         }
@@ -42,7 +45,10 @@ public class LeverScript : MonoBehaviour {
         {
             foreach (Transform controlledObject in controlledObjects)
             {
-                controlledObject.GetComponent<DoorScript>().makeNonActive();
+                if (controlledObject.name.Contains("Door"))
+                {
+                    controlledObject.GetComponent<DoorScript>().makeNonActive();
+                };
             }
             mySprite.sprite = Resources.Load("Sprites/lever_off", typeof(Sprite)) as Sprite;
         }
