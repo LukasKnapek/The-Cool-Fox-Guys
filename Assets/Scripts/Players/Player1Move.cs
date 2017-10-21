@@ -26,7 +26,8 @@ public class Player1Move : MonoBehaviour {
 		groundmask = 1 << LayerMask.NameToLayer ("Ground");
         playerAnim = GetComponent<Animator>();
         mySprite = GetComponent<SpriteRenderer>();
-        powerBar = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBar").GetComponent<Slider>();
+        if(GameObject.Find("UI"))
+            powerBar = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBar").GetComponent<Slider>();
 	}
 	
 	// Update is called once per frame

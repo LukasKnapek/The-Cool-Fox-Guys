@@ -47,6 +47,7 @@ public class ButtonScript : MonoBehaviour {
             mySprite.color = new Color(255, 0, 0);
             foreach (Transform controlledObject in controlledObjects)
             {
+                Debug.Log(controlledObject);
                 controlledObject.GetComponent<DoorScript>().makeNonActive();
             }
         }
