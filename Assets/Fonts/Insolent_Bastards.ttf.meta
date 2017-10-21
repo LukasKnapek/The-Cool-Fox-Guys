@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 6056c1e709995d64cb485e80c4b52d8b
+timeCreated: 1508623402
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Insolent_Bastards
+  fontNames:
+  - Insolent_Bastards
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
