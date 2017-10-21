@@ -57,7 +57,7 @@ public class PlayerFoxMove : MonoBehaviour {
 		if (grounded) {
 			rb2d.gravityScale = 0;
 		} else {
-			rb2d.gravityScale = 4;
+			rb2d.gravityScale = 10;
 		}
 
 		float horizontalInput = Input.GetAxisRaw("Player1Horizontal");
