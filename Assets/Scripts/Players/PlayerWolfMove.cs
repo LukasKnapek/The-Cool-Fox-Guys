@@ -66,7 +66,7 @@ public class PlayerWolfMove : MonoBehaviour
         }
         else
         {
-            rb2d.gravityScale = 4;
+            rb2d.gravityScale = 10;
         }
 
 
