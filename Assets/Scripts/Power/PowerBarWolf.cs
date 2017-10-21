@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PowerBar : MonoBehaviour {
+public class PowerBarWolf : MonoBehaviour {
 
     private float power = 1f;
 

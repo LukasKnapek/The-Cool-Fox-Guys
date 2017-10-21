@@ -36,12 +36,12 @@ public class GameMaster : MonoBehaviour
 
         gameOverScreen.enabled = true;
         gameOverScreen.canvasRenderer.SetAlpha(0.0f);
-        gameOverScreen.CrossFadeAlpha(1.0f, 3.0f, true);
+        gameOverScreen.CrossFadeAlpha(1.0f, 2.0f, true);
 
-        gameOverText.enabled = true;
+        gameOverText.enabled = false;
         gameOverText.transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 1f);
         gameOverText.canvasRenderer.SetAlpha(0.0f);
-        gameOverText.CrossFadeAlpha(1.0f, 3.0f, true);
+        gameOverText.CrossFadeAlpha(1.0f, 2.0f, true);
 
         StartCoroutine(Waiter());
 
@@ -49,9 +49,7 @@ public class GameMaster : MonoBehaviour
 
     IEnumerator Waiter()
     {
-        print(Time.time);
-        yield return new WaitForSeconds(5);
-        print(Time.time);
+        yield return new WaitForSeconds(3);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 

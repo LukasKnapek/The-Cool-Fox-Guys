@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Player2Move : MonoBehaviour
+public class PlayerWolfMove : MonoBehaviour
 {
-
     public float acceleration = 1f;
     public float maxSpeed = 5f;
-
     public float jumpForce = 800f;
     [HideInInspector] public bool jump = false;
     public Transform Player2GroundCheck;
@@ -17,6 +16,7 @@ public class Player2Move : MonoBehaviour
     Animator playerAnim;
     SpriteRenderer mySprite;
     ParticleSystem deathParticle;
+    Slider powerBar;
 
     private Rigidbody2D rb2d;
 
@@ -27,6 +27,8 @@ public class Player2Move : MonoBehaviour
         groundmask = 1 << LayerMask.NameToLayer("Ground");
         playerAnim = GetComponent<Animator>();
         mySprite = GetComponent<SpriteRenderer>();
+        if (GameObject.Find("UI"))
+            powerBar = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarFox").GetComponent<Slider>();
         deathParticle = GameObject.Find("DeathParticle").GetComponent<ParticleSystem>();
 
     }
@@ -39,6 +41,7 @@ public class Player2Move : MonoBehaviour
         if (Input.GetButtonDown("Player2Jump") && grounded)
         {
             jump = true;
+            powerBar.GetComponent<PowerBarWolf>().decreasePower(0.04f);
         }
     }
 

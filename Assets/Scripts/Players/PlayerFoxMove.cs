@@ -3,40 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player1Move : MonoBehaviour {
+public class PlayerFoxMove : MonoBehaviour {
 
 	public float acceleration = 1f;
 	public float maxSpeed = 5f;
-
 	public float jumpForce = 800f;
 	[HideInInspector] public bool jump = false;
 	public Transform Player1GroundCheck;
+
+    private bool grounded = false;
+    private int groundmask;
     Animator playerAnim;
     SpriteRenderer mySprite;
+    ParticleSystem deathParticle;
     Slider powerBar;
     
-	private bool grounded = false;
-	private int groundmask;
-
 	private Rigidbody2D rb2d;
 
 	// Use this for initialization
-	void Awake () {
+	void Awake ()
+    {
 		rb2d = GetComponent<Rigidbody2D> ();
 		groundmask = 1 << LayerMask.NameToLayer ("Ground");
         playerAnim = GetComponent<Animator>();
         mySprite = GetComponent<SpriteRenderer>();
         if(GameObject.Find("UI"))
-            powerBar = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBar").GetComponent<Slider>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+            powerBar = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarWolf").GetComponent<Slider>();
+        deathParticle = GameObject.Find("DeathParticle").GetComponent<ParticleSystem>();
+    }
+
+    // Update is called once per frame
+    void Update ()
+    {
 		grounded = Physics2D.Linecast(transform.position, Player1GroundCheck.position, groundmask);
 
 		if (Input.GetButtonDown("Player1Jump") && grounded){
 			jump = true;
-            powerBar.GetComponent<PowerBar>().decreasePower(0.04f);
+            powerBar.GetComponent<PowerBarFox>().decreasePower(0.04f);
 		}
     }
 
@@ -56,7 +59,6 @@ public class Player1Move : MonoBehaviour {
             mySprite.flipX = false;
         else if (horizontalInput < 0)
             mySprite.flipX = true;
-
         playerAnim.SetFloat("Walking", horizontalInput);
 
 		if (horizontalInput != 0 && Mathf.Abs(rb2d.velocity.x) < maxSpeed) {
@@ -76,4 +78,15 @@ public class Player1Move : MonoBehaviour {
 			jump = false;
 		}
 	}
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Danger")
+        {
+            deathParticle.transform.position = this.transform.position;
+            deathParticle.Play();
+            Destroy(this.gameObject);
+            GameMaster.GM.GameOver();
+        }
+    }
 }
