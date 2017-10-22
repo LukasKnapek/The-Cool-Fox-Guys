@@ -9,14 +9,14 @@ public class GameMaster : MonoBehaviour
     public static GameMaster GM;
 
     public Dictionary<string, List<string>> ControlBindings;
-    public Image gameOverScreen;
-    public Image winScreen;
-    public Text gameOverText;
-    public Text restartText;
-    public Camera mainCamera;
+    public static Image gameOverScreen;
+    public static Image winScreen;
+    public static Text gameOverText;
+    public static Text restartText;
+    public static Camera mainCamera;
     public static AudioSource mainPlayer;
-    private Slider powerBarFox;
-    private Slider powerBarWolf;
+    private static Slider powerBarFox;
+    private static Slider powerBarWolf;
 
     private GameObject playerWolf;
     private GameObject playerFox;
@@ -31,10 +31,10 @@ public class GameMaster : MonoBehaviour
     public static GameObject checkPoint3;
     public static GameObject checkPoint4;
 
+    public static bool hardMode;
 
     void Awake()
     {
-
         playerWolf = GameObject.Find("PlayerWolf");
         playerFox = GameObject.Find("PlayerFox");
 
@@ -42,6 +42,10 @@ public class GameMaster : MonoBehaviour
         checkPoint2 = GameObject.Find("CheckPoint2");
         checkPoint3 = GameObject.Find("CheckPoint3");
         checkPoint4 = GameObject.Find("CheckPoint4");
+
+        powerBarFox = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarFox").GetComponent<Slider>();
+        powerBarWolf = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarWolf").GetComponent<Slider>();
+        restartText = GameObject.Find("UI").GetComponent<Transform>().Find("RestartText").GetComponent<Text>();
 
         if (reached4)
         {
@@ -63,8 +67,7 @@ public class GameMaster : MonoBehaviour
             playerWolf.transform.position = checkPoint1.transform.position;
             playerFox.transform.position = checkPoint1.transform.position;
         }
-
-
+        
         if (GM == null)
             GM = this;
         else if (GM != null)
@@ -84,25 +87,31 @@ public class GameMaster : MonoBehaviour
             { "Button", new List<string>() {"Barrier"}}
         };
 
-        powerBarFox = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarFox").GetComponent<Slider>();
-        powerBarWolf = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarWolf").GetComponent<Slider>();
-        restartText = GameObject.Find("UI").GetComponent<Transform>().Find("RestartText").GetComponent<Text>();
-
-}
+        if (hardMode)
+        {
+            checkPoint1.transform.position = new Vector2(-200, -200);
+            checkPoint2.transform.position = new Vector2(-200, -200);
+            checkPoint3.transform.position = new Vector2(-200, -200);
+            checkPoint4.transform.position = new Vector2(-200, -200);
+        }
+    }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Restart"))
+        if (Input.GetButtonDown("Restart") && restartText.enabled)
         {
+            
             reached1 = checkPoint1.GetComponent<CheckpointScript>().isReached();
             reached2 = checkPoint2.GetComponent<CheckpointScript>().isReached();
             reached3 = checkPoint3.GetComponent<CheckpointScript>().isReached();
             reached4 = checkPoint4.GetComponent<CheckpointScript>().isReached();
-
+            
+            //CheckpointScript.foxBarValue = CheckpointScript.wolfBarValue = 1f;
             SceneManager.LoadScene("Level 1");
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
+            CheckpointScript.foxBarValue = CheckpointScript.wolfBarValue = 1f;
             SceneManager.LoadScene("Menu");
         }
 
@@ -119,13 +128,8 @@ public class GameMaster : MonoBehaviour
         }
         else
         {
-            powerBarFox = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarFox").GetComponent<Slider>();
-            powerBarWolf = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarWolf").GetComponent<Slider>();
-            restartText = GameObject.Find("UI").GetComponent<Transform>().Find("RestartText").GetComponent<Text>();
-            restartText.enabled = false;
-
+            //restartText.enabled = false;
         }
-
     }
 
     public void GameOver()

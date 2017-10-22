@@ -8,7 +8,13 @@ public class LevelManager : MonoBehaviour {
 
     public void LoadLevel(string name)
     {
-        Debug.Log("Level load requested for: " + name);
+        GameMaster.hardMode = false;
+        SceneManager.LoadScene(name);
+    }
+
+    public void LoadLevelHardMode(string name)
+    {
+        GameMaster.hardMode = true;
         SceneManager.LoadScene(name);
     }
 
@@ -17,14 +23,4 @@ public class LevelManager : MonoBehaviour {
         Debug.Log("Quit game requested");
         Application.Quit();
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

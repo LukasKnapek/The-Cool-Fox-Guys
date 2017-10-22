@@ -8,13 +8,13 @@ public class CheckpointScript : MonoBehaviour {
     public bool reached;
     private bool playerWolfReached;
     private bool playerFoxReached;
-    private float playerWolfPower;
-    private float playerFoxPower;
 
     public Vector3 checkpointPosition;
 
     private Slider powerBarFox;
     private Slider powerBarWolf;
+
+    public static float foxBarValue, wolfBarValue;
 
     // Use this for initialization
     void Start () {
@@ -31,9 +31,10 @@ public class CheckpointScript : MonoBehaviour {
 
         if (playerFoxReached && playerWolfReached)
         {
-            //playerWolfPower = powerBarWolf.value;
-            //playerFoxPower = powerBarFox.value;
             this.GetComponent<SpriteRenderer>().color = Color.green;
+
+            //foxBarValue = powerBarFox.value;
+            //wolfBarValue = powerBarWolf.value;
         }
 	}
 
