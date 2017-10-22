@@ -8,51 +8,58 @@ public class LeverScript : MonoBehaviour {
     private bool togglable = false;
     private SpriteRenderer mySprite;
     private SpriteRenderer playerSprite;
-    private List<Transform> controlledObjects;
+    private List<GameObject> controlledObjects;
 
     // Use this for initialization
     void Start () {
         mySprite = GetComponent<SpriteRenderer>();
         GameMaster GM = GameMaster.GM;
 
-        controlledObjects = new List<Transform>();
+        controlledObjects = new List<GameObject>();
         foreach (string controlledObject in GM.ControlBindings[this.name])
         {
-            controlledObjects.Add(GameObject.Find("Environment").GetComponent<Transform>().Find(controlledObject));
+            controlledObjects.Add(GameObject.Find("Environment").GetComponent<Transform>().Find(controlledObject).gameObject);
         }
     }
 
     // Update is called once per frame
     void Update () {
-        /*
         if ((Input.GetButtonDown("Player1Interact") || Input.GetButtonDown("Player2Interact")) && togglable)
         {
+            Debug.Log(toggled);
             toggled = !toggled;
+            this.GetComponent<AudioSource>().Play();
         }
-
+        
         if (toggled)
         {
-            foreach (Transform controlledObject in controlledObjects)
+            foreach (GameObject controlledObject in controlledObjects)
             {
-                if (controlledObject.name.Contains("Door"))
+                if (controlledObject.name.Contains("Bridge"))
                 {
-                    controlledObject.GetComponent<DoorScript>().makeActive();
+                    controlledObject.GetComponent<Animator>().enabled = true;
+                    controlledObject.GetComponent<BoxCollider2D>().enabled = true;
+
                 }
+                controlledObject.gameObject.SetActive(true);
             }
             mySprite.sprite = Resources.Load("Sprites/lever_on", typeof(Sprite)) as Sprite;
         }
         else
         {
-            foreach (Transform controlledObject in controlledObjects)
+            foreach (GameObject controlledObject in controlledObjects)
             {
-                if (controlledObject.name.Contains("Door"))
+                if (controlledObject.name.Contains("Bridge"))
                 {
-                    controlledObject.GetComponent<DoorScript>().makeNonActive();
-                };
+                    controlledObject.GetComponent<Animator>().enabled = true;
+                    controlledObject.GetComponent<BoxCollider2D>().enabled = true;
+
+                }
+                controlledObject.gameObject.SetActive(false);
+
             }
             mySprite.sprite = Resources.Load("Sprites/lever_off", typeof(Sprite)) as Sprite;
         }
-        */
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

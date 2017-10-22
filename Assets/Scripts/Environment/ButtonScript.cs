@@ -8,7 +8,7 @@ public class ButtonScript : MonoBehaviour {
     private bool togglable = false;
     private SpriteRenderer mySprite;
     private SpriteRenderer playerSprite;
-    private List<Transform> controlledObjects;
+    private List<GameObject> controlledObjects;
 
     // Use this for initialization
     void Start()
@@ -19,10 +19,10 @@ public class ButtonScript : MonoBehaviour {
 
         // Find and load all objects this particular button controls
         
-        controlledObjects = new List<Transform>();
+        controlledObjects = new List<GameObject>();
         foreach (string controlledObject in GM.ControlBindings[this.name])
         {
-            controlledObjects.Add(GameObject.Find("Environment").GetComponent<Transform>().Find(controlledObject));
+            controlledObjects.Add(GameObject.Find("Environment").GetComponent<Transform>().Find(controlledObject).gameObject);
         }
     }
     // Update is called once per frame
@@ -31,27 +31,22 @@ public class ButtonScript : MonoBehaviour {
         if ((Input.GetButtonDown("Player1Interact") || Input.GetButtonDown("Player2Interact")) && togglable)
         {
             toggled = !toggled;
+            this.GetComponent<AudioSource>().Play();
         }
 
         if (toggled)
         {
-            foreach (Transform controlledObject in controlledObjects)
+            foreach (GameObject controlledObject in controlledObjects)
             {
-                if (controlledObject.name.Contains("Door"))
-                {
-                    controlledObject.GetComponent<DoorScript>().makeActive();
-                }
+                controlledObject.SetActive(false);
             }
             mySprite.sprite = Resources.Load("Sprites/button_on", typeof(Sprite)) as Sprite;
         }
         else
         {
-            foreach (Transform controlledObject in controlledObjects)
+            foreach (GameObject controlledObject in controlledObjects)
             {
-                if (controlledObject.name.Contains("Door"))
-                {
-                    controlledObject.GetComponent<DoorScript>().makeNonActive();
-                };
+                controlledObject.SetActive(true);
             }
             mySprite.sprite = Resources.Load("Sprites/button_off", typeof(Sprite)) as Sprite;
         }

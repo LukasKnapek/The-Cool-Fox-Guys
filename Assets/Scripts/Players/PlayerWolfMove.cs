@@ -106,22 +106,26 @@ public class PlayerWolfMove : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (powerBar.GetComponent<PowerBarWolf>().getPower() <= 0f)
+        
+        if (collision.gameObject.tag == "Barrier")
         {
-            collision.GetComponent<BoxCollider2D>().isTrigger = false;
-        }
-       else if (collision.gameObject.tag == "Barrier")
-        {
-            powerBar.GetComponent<PowerBarWolf>().decreasePower(0.2f);
-            powerParticle = GameObject.Find("WolfPowerParticle").GetComponent<ParticleSystem>();
-            powerParticle.transform.position = this.transform.position;
-            powerParticle.Play();
+            if (powerBar.GetComponent<PowerBarWolf>().getPower() <= 0f)
+            {
+                collision.GetComponent<BoxCollider2D>().isTrigger = false;
+            }
+            else
+            {
+                powerBar.GetComponent<PowerBarWolf>().decreasePower(0.12f);
+                powerParticle = GameObject.Find("WolfPowerParticle").GetComponent<ParticleSystem>();
+                powerParticle.transform.position = this.transform.position;
+                powerParticle.Play();
+            }   
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Danger")
+        if (collision.gameObject.name == "Level End")
         {
             GameMaster.GM.Win();
         }

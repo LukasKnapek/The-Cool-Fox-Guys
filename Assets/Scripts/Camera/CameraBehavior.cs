@@ -15,6 +15,8 @@ public class CameraBehavior : MonoBehaviour {
     private SpriteRenderer wolfDownRenderer;
 
     private GameObject playerFox;
+    private GameObject playerWolf;
+
     private Transform playerTransform;
     private Camera mainCamera;
     private float yOffset = 0f;
@@ -37,6 +39,8 @@ public class CameraBehavior : MonoBehaviour {
         wolfDown = GameObject.Find("PlayerWolfDownCheck").GetComponent<SpriteRenderer>();
 
         playerFox = GameObject.Find("PlayerFox");
+        playerWolf = GameObject.Find("PlayerWolf");
+
         playerTransform = playerFox.GetComponent<Transform>();
         canDecreaseSize = true;
     }
@@ -49,17 +53,21 @@ public class CameraBehavior : MonoBehaviour {
             transform.position = cameraPos;      
         }
 
-        if (!wolfLeft.isVisible || !wolfRight.isVisible || !wolfUp.isVisible || !wolfDown.isVisible)
+        if (playerWolf != null)
         {
-            mainCamera.orthographicSize += 0.05f;
-        }
-        else
-        {
-            if (wolfLeftRenderer.isVisible && wolfRightRenderer.isVisible && wolfUpRenderer.isVisible && wolfDownRenderer.isVisible && mainCamera.orthographicSize > 6)
+            if (!wolfLeft.isVisible || !wolfRight.isVisible || !wolfUp.isVisible || !wolfDown.isVisible)
             {
-                mainCamera.orthographicSize -= 0.05f;
+                mainCamera.orthographicSize += 0.05f;
+            }
+            else
+            {
+                if (wolfLeftRenderer.isVisible && wolfRightRenderer.isVisible && wolfUpRenderer.isVisible && wolfDownRenderer.isVisible && mainCamera.orthographicSize > 6)
+                {
+                    mainCamera.orthographicSize -= 0.05f;
+                }
             }
         }
+        
     }
 
 }
