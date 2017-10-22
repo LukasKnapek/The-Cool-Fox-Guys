@@ -15,7 +15,7 @@ public class GameOver : MonoBehaviour {
 	void Update () {
         if (Input.GetButtonDown("Restart"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            SceneManager.LoadScene("Level 1");
         }
         if (Input.GetKeyDown(KeyCode.M))
         {

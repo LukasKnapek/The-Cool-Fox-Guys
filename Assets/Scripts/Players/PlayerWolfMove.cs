@@ -112,8 +112,13 @@ public class PlayerWolfMove : MonoBehaviour
 
         if (jump)
         {
+            playerAnim.SetTrigger("Jump");
             rb2d.AddForce(new Vector2(0f, jumpForce));
             jump = false;
+        }
+        else
+        {
+            playerAnim.SetFloat("Walking", horizontalInput);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

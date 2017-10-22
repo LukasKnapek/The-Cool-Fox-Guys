@@ -18,6 +18,15 @@ public class GameMaster : MonoBehaviour
     private Slider powerBarFox;
     private Slider powerBarWolf;
 
+    private GameObject playerWolf;
+    private GameObject playerFox;
+
+    public GameObject checkPoint1;
+    public GameObject checkPoint2;
+    public GameObject checkPoint3;
+    public GameObject checkPoint4;
+
+
     void Awake()
     {
         if (GM == null)
@@ -43,7 +52,15 @@ public class GameMaster : MonoBehaviour
         powerBarWolf = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarWolf").GetComponent<Slider>();
         restartText = GameObject.Find("UI").GetComponent<Transform>().Find("RestartText").GetComponent<Text>();
 
-    }
+        checkPoint1 = GameObject.Find("CheckPoint1");
+        checkPoint2 = GameObject.Find("CheckPoint2");
+        checkPoint3 = GameObject.Find("CheckPoint3");
+        checkPoint4 = GameObject.Find("CheckPoint4");
+
+        playerWolf = GameObject.Find("PlayerWolf");
+        playerFox = GameObject.Find("PlayerFox");
+
+}
 
     private void Update()
     {
@@ -122,6 +139,7 @@ public class GameMaster : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
         SceneManager.LoadScene("Win");
+
 
     }
 }
