@@ -26,4 +26,9 @@ public class PowerBarWolf : MonoBehaviour {
     {
         power -= amount;
     }
+
+    public float getPower()
+    {
+        return power;
+    }
 }
