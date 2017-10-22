@@ -64,7 +64,6 @@ public class PlayerWolfMove : MonoBehaviour
         {
             jump = true;
             sound.PlayOneShot(jumpSound);
-
         }
     }
 
@@ -132,7 +131,7 @@ public class PlayerWolfMove : MonoBehaviour
             }
             else
             {
-                powerBar.GetComponent<PowerBarWolf>().decreasePower(0.12f);
+                powerBar.GetComponent<PowerBarWolf>().decreasePower(0.1f);
                 powerParticle = GameObject.Find("WolfPowerParticle").GetComponent<ParticleSystem>();
                 powerParticle.transform.position = this.transform.position;
                 powerParticle.Play();

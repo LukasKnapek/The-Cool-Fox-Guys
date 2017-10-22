@@ -8,8 +8,7 @@ public class PlayerFoxMove : MonoBehaviour {
 	public float acceleration = 1f;
 	public float maxSpeed = 5f;
 	public float jumpForce = 800f;
-	[HideInInspector] public bool jump1 = false;
-    [HideInInspector] public bool jump2 = false;
+	[HideInInspector] public bool jump = false;
     public Transform Player1GroundCheck;
 
     private bool grounded = false;
@@ -21,10 +20,12 @@ public class PlayerFoxMove : MonoBehaviour {
     Slider powerBar;
     
 	private Rigidbody2D rb2d;
+
     private AudioClip jumpSound;
     private AudioClip walkSound;
     private AudioClip deathSound;
     private AudioClip screamSound;
+
     private AudioSource sound;
     private AudioSource mainPlayer;
 
@@ -60,6 +61,8 @@ public class PlayerFoxMove : MonoBehaviour {
         { 
             if (grounded)
             {
+                jump = true;
+
                 rb2d.AddForce(new Vector2(0f, jumpForce));
                 if (powerBar.GetComponent<PowerBarFox>().getPower() > 0f)
                 {
@@ -75,7 +78,7 @@ public class PlayerFoxMove : MonoBehaviour {
                 sound.PlayOneShot(jumpSound);
                 canDoubleJump = false;
 
-                powerBar.GetComponent<PowerBarFox>().decreasePower(0.12f);
+                powerBar.GetComponent<PowerBarFox>().decreasePower(0.06f);
                 powerParticle = GameObject.Find("FoxPowerParticle").GetComponent<ParticleSystem>();
                 powerParticle.transform.position = this.transform.position;
                 powerParticle.Play();
@@ -115,7 +118,11 @@ public class PlayerFoxMove : MonoBehaviour {
 		if (Mathf.Abs (rb2d.velocity.x) > maxSpeed) {
 			rb2d.velocity = new Vector2 (Mathf.Sign (rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
 		}
-
+        if (jump)
+        {
+            playerAnim.SetTrigger("Jump");
+            jump = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

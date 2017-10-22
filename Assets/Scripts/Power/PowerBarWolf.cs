@@ -6,11 +6,6 @@ using UnityEngine.UI;
 public class PowerBarWolf : MonoBehaviour {
 
     private float power = 1f;
-
-	// Use this for initialization
-	void Start () {
-
-	}
 	
 	// Update is called once per frame
 	void Update () {

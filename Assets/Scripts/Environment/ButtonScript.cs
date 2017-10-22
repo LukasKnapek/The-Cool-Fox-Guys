@@ -52,7 +52,7 @@ public class ButtonScript : MonoBehaviour {
                 }
                 controlledObject.gameObject.SetActive(true);
             }
-            mySprite.sprite = Resources.Load("Sprites/button_on", typeof(Sprite)) as Sprite;
+            mySprite.sprite = Resources.Load("Sprites/button_off", typeof(Sprite)) as Sprite;
         }
         else
         {
@@ -67,7 +67,7 @@ public class ButtonScript : MonoBehaviour {
                 controlledObject.gameObject.SetActive(false);
 
             }
-            mySprite.sprite = Resources.Load("Sprites/button_off", typeof(Sprite)) as Sprite;
+            mySprite.sprite = Resources.Load("Sprites/button_on", typeof(Sprite)) as Sprite;
         }
     }
 
