@@ -80,7 +80,6 @@ public class GameMaster : MonoBehaviour
 
     public void GameOver()
     {
-        mainPlayer.Stop();
         gameOverScreen = GameObject.Find("UI").GetComponent<Transform>().Find("GameOverScreen").GetComponent<Image>();
         gameOverText = GameObject.Find("UI").GetComponent<Transform>().Find("GameOverText").GetComponent<Text>();
         mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();

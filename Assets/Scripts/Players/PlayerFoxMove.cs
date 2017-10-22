@@ -23,7 +23,10 @@ public class PlayerFoxMove : MonoBehaviour {
 	private Rigidbody2D rb2d;
     private AudioClip jumpSound;
     private AudioClip walkSound;
+    private AudioClip deathSound;
+    private AudioClip screamSound;
     private AudioSource sound;
+    private AudioSource mainPlayer;
 
     private bool canDoubleJump = false;
 
@@ -37,9 +40,14 @@ public class PlayerFoxMove : MonoBehaviour {
         if(GameObject.Find("UI"))
         powerBar = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarFox").GetComponent<Slider>();
         deathParticle = GameObject.Find("DeathParticle").GetComponent<ParticleSystem>();
+
         jumpSound = Resources.Load("Audio/SFX/jumping/jump", typeof(AudioClip)) as AudioClip;
         walkSound = Resources.Load("Audio/SFX/walking/footsteps_dirt", typeof(AudioClip)) as AudioClip;
+        deathSound = Resources.Load("Audio/SFX/interaction/player_death", typeof(AudioClip)) as AudioClip;
+        screamSound = Resources.Load("Audio/SFX/interaction/player_hurt", typeof(AudioClip)) as AudioClip;
+
         sound = this.GetComponent<AudioSource>();
+        mainPlayer = GameObject.Find("MusicPlayer").GetComponent<AudioSource>();
 
     }
 
@@ -108,7 +116,6 @@ public class PlayerFoxMove : MonoBehaviour {
 			rb2d.velocity = new Vector2 (Mathf.Sign (rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
 		}
 
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -117,6 +124,11 @@ public class PlayerFoxMove : MonoBehaviour {
         {
             deathParticle.transform.position = this.transform.position;
             deathParticle.Play();
+
+            mainPlayer.Stop();
+            mainPlayer.PlayOneShot(deathSound);
+            mainPlayer.PlayOneShot(screamSound);
+
             Destroy(this.gameObject);
             GameMaster.GM.GameOver();
         }

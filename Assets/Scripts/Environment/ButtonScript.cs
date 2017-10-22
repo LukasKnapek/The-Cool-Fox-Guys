@@ -5,7 +5,8 @@ using UnityEngine;
 public class ButtonScript : MonoBehaviour {
 
     private bool toggled = false;
-    private bool togglable = false;
+    private bool togglableWolf = false;
+    private bool togglableFox = false;
     private SpriteRenderer mySprite;
     private SpriteRenderer playerSprite;
     private List<GameObject> controlledObjects;
@@ -28,7 +29,7 @@ public class ButtonScript : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if ((Input.GetButtonDown("Player1Interact") || Input.GetButtonDown("Player2Interact")) && togglable)
+        if ((Input.GetButtonDown("Player1Interact") && togglableFox) || (Input.GetButtonDown("Player2Interact") && togglableWolf))
         {
             toggled = !toggled;
             this.GetComponent<AudioSource>().Play();
@@ -38,7 +39,18 @@ public class ButtonScript : MonoBehaviour {
         {
             foreach (GameObject controlledObject in controlledObjects)
             {
-                controlledObject.SetActive(false);
+                if (controlledObject.name.Contains("Bridge"))
+                {
+                    Debug.Log(controlledObject.GetComponent<Animator>().enabled + ":" + controlledObject.GetComponent<BoxCollider2D>().enabled);
+                    if (controlledObject.GetComponent<Animator>().enabled == false || controlledObject.GetComponent<BoxCollider2D>().enabled == false)
+                    {
+                        controlledObject.GetComponent<Animator>().enabled = true;
+                        controlledObject.GetComponent<BoxCollider2D>().enabled = true;
+                        controlledObject.GetComponent<AudioSource>().Play();
+                    }
+
+                }
+                controlledObject.gameObject.SetActive(true);
             }
             mySprite.sprite = Resources.Load("Sprites/button_on", typeof(Sprite)) as Sprite;
         }
@@ -46,7 +58,14 @@ public class ButtonScript : MonoBehaviour {
         {
             foreach (GameObject controlledObject in controlledObjects)
             {
-                controlledObject.SetActive(true);
+                if (controlledObject.name.Contains("Bridge"))
+                {
+                    controlledObject.GetComponent<Animator>().enabled = false;
+                    controlledObject.GetComponent<BoxCollider2D>().enabled = false;
+
+                }
+                controlledObject.gameObject.SetActive(false);
+
             }
             mySprite.sprite = Resources.Load("Sprites/button_off", typeof(Sprite)) as Sprite;
         }
@@ -54,11 +73,13 @@ public class ButtonScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        togglable = true;
+        if (collision.gameObject.name == "PlayerFox") togglableFox = true;
+        else if (collision.gameObject.name == "PlayerWolf") togglableWolf = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        togglable = false;
+        if (collision.gameObject.name == "PlayerFox") togglableFox = false;
+        else if (collision.gameObject.name == "PlayerWolf") togglableWolf = false;
     }
 }

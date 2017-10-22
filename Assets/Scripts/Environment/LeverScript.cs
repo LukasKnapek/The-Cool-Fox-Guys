@@ -5,7 +5,8 @@ using UnityEngine;
 public class LeverScript : MonoBehaviour {
 
     private bool toggled = false;
-    private bool togglable = false;
+    private bool togglableWolf = false;
+    private bool togglableFox = false;
     private SpriteRenderer mySprite;
     private SpriteRenderer playerSprite;
     private List<GameObject> controlledObjects;
@@ -24,9 +25,8 @@ public class LeverScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if ((Input.GetButtonDown("Player1Interact") || Input.GetButtonDown("Player2Interact")) && togglable)
+        if ((Input.GetButtonDown("Player1Interact") && togglableFox) || (Input.GetButtonDown("Player2Interact") && togglableWolf))
         {
-            Debug.Log(toggled);
             toggled = !toggled;
             this.GetComponent<AudioSource>().Play();
         }
@@ -37,8 +37,11 @@ public class LeverScript : MonoBehaviour {
             {
                 if (controlledObject.name.Contains("Bridge"))
                 {
-                    controlledObject.GetComponent<Animator>().enabled = true;
-                    controlledObject.GetComponent<BoxCollider2D>().enabled = true;
+                    if (controlledObject.GetComponent<Animator>().enabled == false || controlledObject.GetComponent<BoxCollider2D>().enabled == false)
+                    {
+                        controlledObject.GetComponent<Animator>().enabled = true;
+                        controlledObject.GetComponent<BoxCollider2D>().enabled = true;
+                    }
 
                 }
                 controlledObject.gameObject.SetActive(true);
@@ -64,11 +67,13 @@ public class LeverScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        togglable = true;
+        if (collision.gameObject.name == "PlayerFox") togglableFox = true;
+        else if (collision.gameObject.name == "PlayerWolf") togglableWolf = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        togglable = false;
+        if (collision.gameObject.name == "PlayerFox") togglableFox = false;
+        else if (collision.gameObject.name == "PlayerWolf") togglableWolf = false;
     }
 }
