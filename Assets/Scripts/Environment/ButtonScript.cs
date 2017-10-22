@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ButtonScript : MonoBehaviour {
 
-    private bool toggled = false;
+    public bool buttonIsOn = false;
     private bool togglableWolf = false;
     private bool togglableFox = false;
     private SpriteRenderer mySprite;
@@ -31,11 +31,11 @@ public class ButtonScript : MonoBehaviour {
 
         if ((Input.GetButtonDown("Player1Interact") && togglableFox) || (Input.GetButtonDown("Player2Interact") && togglableWolf))
         {
-            toggled = !toggled;
+            buttonIsOn = !buttonIsOn;
             this.GetComponent<AudioSource>().Play();
         }
 
-        if (toggled)
+        if (buttonIsOn)
         {
             foreach (GameObject controlledObject in controlledObjects)
             {

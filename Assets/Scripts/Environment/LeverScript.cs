@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LeverScript : MonoBehaviour {
 
-    private bool toggled = false;
+    public bool leverIsOn = false;
     private bool togglableWolf = false;
     private bool togglableFox = false;
     private SpriteRenderer mySprite;
@@ -27,11 +27,11 @@ public class LeverScript : MonoBehaviour {
     void Update () {
         if ((Input.GetButtonDown("Player1Interact") && togglableFox) || (Input.GetButtonDown("Player2Interact") && togglableWolf))
         {
-            toggled = !toggled;
+            leverIsOn = !leverIsOn;
             this.GetComponent<AudioSource>().Play();
         }
         
-        if (toggled)
+        if (leverIsOn)
         {
             foreach (GameObject controlledObject in controlledObjects)
             {
