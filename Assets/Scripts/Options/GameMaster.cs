@@ -21,14 +21,50 @@ public class GameMaster : MonoBehaviour
     private GameObject playerWolf;
     private GameObject playerFox;
 
-    public GameObject checkPoint1;
-    public GameObject checkPoint2;
-    public GameObject checkPoint3;
-    public GameObject checkPoint4;
+    public static bool reached1;
+    public static bool reached2;
+    public static bool reached3;
+    public static bool reached4;
+   
+    public static GameObject checkPoint1;
+    public static GameObject checkPoint2;
+    public static GameObject checkPoint3;
+    public static GameObject checkPoint4;
 
 
     void Awake()
     {
+
+        playerWolf = GameObject.Find("PlayerWolf");
+        playerFox = GameObject.Find("PlayerFox");
+
+        checkPoint1 = GameObject.Find("CheckPoint1");
+        checkPoint2 = GameObject.Find("CheckPoint2");
+        checkPoint3 = GameObject.Find("CheckPoint3");
+        checkPoint4 = GameObject.Find("CheckPoint4");
+
+        if (reached4)
+        {
+            playerWolf.transform.position = checkPoint4.transform.position;
+            playerFox.transform.position = checkPoint4.transform.position;
+        }
+        else if (reached3)
+        {
+            playerWolf.transform.position = checkPoint3.transform.position;
+            playerFox.transform.position = checkPoint3.transform.position;
+        }
+        else if (reached2)
+        {
+            playerWolf.transform.position = checkPoint2.transform.position;
+            playerFox.transform.position = checkPoint2.transform.position;
+        }
+        else if (reached1)
+        {
+            playerWolf.transform.position = checkPoint1.transform.position;
+            playerFox.transform.position = checkPoint1.transform.position;
+        }
+
+
         if (GM == null)
             GM = this;
         else if (GM != null)
@@ -52,20 +88,17 @@ public class GameMaster : MonoBehaviour
         powerBarWolf = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarWolf").GetComponent<Slider>();
         restartText = GameObject.Find("UI").GetComponent<Transform>().Find("RestartText").GetComponent<Text>();
 
-        checkPoint1 = GameObject.Find("CheckPoint1");
-        checkPoint2 = GameObject.Find("CheckPoint2");
-        checkPoint3 = GameObject.Find("CheckPoint3");
-        checkPoint4 = GameObject.Find("CheckPoint4");
-
-        playerWolf = GameObject.Find("PlayerWolf");
-        playerFox = GameObject.Find("PlayerFox");
-
 }
 
     private void Update()
     {
         if (Input.GetButtonDown("Restart"))
         {
+            reached1 = checkPoint1.GetComponent<CheckpointScript>().isReached();
+            reached2 = checkPoint2.GetComponent<CheckpointScript>().isReached();
+            reached3 = checkPoint3.GetComponent<CheckpointScript>().isReached();
+            reached4 = checkPoint4.GetComponent<CheckpointScript>().isReached();
+
             SceneManager.LoadScene("Level 1");
         }
         if (Input.GetKeyDown(KeyCode.M))
@@ -97,6 +130,11 @@ public class GameMaster : MonoBehaviour
 
     public void GameOver()
     {
+        reached1 = checkPoint1.GetComponent<CheckpointScript>().isReached();
+        reached2 = checkPoint2.GetComponent<CheckpointScript>().isReached();
+        reached3 = checkPoint3.GetComponent<CheckpointScript>().isReached();
+        reached4 = checkPoint4.GetComponent<CheckpointScript>().isReached();
+
         gameOverScreen = GameObject.Find("UI").GetComponent<Transform>().Find("GameOverScreen").GetComponent<Image>();
         gameOverText = GameObject.Find("UI").GetComponent<Transform>().Find("GameOverText").GetComponent<Text>();
         mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();

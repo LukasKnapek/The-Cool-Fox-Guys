@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class CheckpointScript : MonoBehaviour {
 
-    public static bool reached;
-    public static Vector3 checkpointPosition;
+    public bool reached;
+    private bool playerWolfReached;
+    private bool playerFoxReached;
+    public Vector3 checkpointPosition;
 
 	// Use this for initialization
 	void Start () {
         reached = false;
+        playerWolfReached = false;
+        playerFoxReached = false;
         checkpointPosition = this.gameObject.transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (reached)
+        if (playerFoxReached && playerWolfReached)
         {
             this.GetComponent<SpriteRenderer>().color = Color.green;
         }
@@ -28,8 +32,13 @@ public class CheckpointScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Triggered");
-        if (other.gameObject.tag == "Player") reached = true;
+        if (other.gameObject.name == "PlayerFox") playerFoxReached = true;
+        if (other.gameObject.name == "PlayerWolf") playerWolfReached = true;
+    }
+
+    public bool isReached()
+    {
+        return reached;
     }
 
 }
