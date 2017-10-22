@@ -2,14 +2,17 @@
 
 public class DestroyObjects : MonoBehaviour
 {
-    bool textDestroyed;
+    public static bool helpText;
 
      private void Start()
     {
-        if (!textDestroyed)
+        if (!helpText)
         {
             Destroy(gameObject, 5f); // Destroy this gameobject after a t time.
-            textDestroyed = true;
+            helpText = true;
+        } else
+        {
+            Destroy(gameObject);
         }
     }
 }
