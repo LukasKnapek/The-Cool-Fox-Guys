@@ -78,7 +78,7 @@ public class PlayerFoxMove : MonoBehaviour {
                 sound.PlayOneShot(jumpSound);
                 canDoubleJump = false;
 
-                powerBar.GetComponent<PowerBarFox>().decreasePower(0.06f);
+                powerBar.GetComponent<PowerBarFox>().decreasePower(0.04f);
                 powerParticle = GameObject.Find("FoxPowerParticle").GetComponent<ParticleSystem>();
                 powerParticle.transform.position = this.transform.position;
                 powerParticle.Play();
