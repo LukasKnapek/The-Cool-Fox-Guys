@@ -94,6 +94,8 @@ public class GameMaster : MonoBehaviour
     {
         if (Input.GetButtonDown("Restart"))
         {
+            Debug.Log(reached1);
+
             reached1 = checkPoint1.GetComponent<CheckpointScript>().isReached();
             reached2 = checkPoint2.GetComponent<CheckpointScript>().isReached();
             reached3 = checkPoint3.GetComponent<CheckpointScript>().isReached();
