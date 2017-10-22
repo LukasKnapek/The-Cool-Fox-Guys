@@ -134,7 +134,6 @@ public class PlayerFoxMove : MonoBehaviour {
         }
         if (collision.gameObject.name == "Level End")
         {
-            Debug.Log("End");
             GameMaster.GM.Win();
         }
     }
