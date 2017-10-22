@@ -423,6 +423,16 @@ Prefab:
       propertyPath: m_Name
       value: Button1
       objectReference: {fileID: 0}
+    - target: {fileID: 82576457273217656, guid: 1f947be3f8b9e4d45b9a0021956174cc,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114737664846659556, guid: 1f947be3f8b9e4d45b9a0021956174cc,
+        type: 2}
+      propertyPath: buttonIsOn
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f947be3f8b9e4d45b9a0021956174cc, type: 2}
   m_IsPrefabParent: 0
@@ -33691,7 +33701,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4161979752340634, guid: 72ef96893a32339488c9c660b6f2b81a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -20.4
+      value: 181.4
       objectReference: {fileID: 0}
     - target: {fileID: 4161979752340634, guid: 72ef96893a32339488c9c660b6f2b81a, type: 2}
       propertyPath: m_LocalPosition.y
@@ -40470,7 +40480,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4597003031077316, guid: ff54a14530346a54bad0323e9541815f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -19.61
+      value: 182.19
       objectReference: {fileID: 0}
     - target: {fileID: 4597003031077316, guid: ff54a14530346a54bad0323e9541815f, type: 2}
       propertyPath: m_LocalPosition.y
