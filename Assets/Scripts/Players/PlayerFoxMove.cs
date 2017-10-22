@@ -78,7 +78,7 @@ public class PlayerFoxMove : MonoBehaviour {
                 sound.PlayOneShot(jumpSound);
                 canDoubleJump = false;
 
-                powerBar.GetComponent<PowerBarFox>().decreasePower(0.04f);
+                powerBar.GetComponent<PowerBarFox>().decreasePower(0.02f);
                 powerParticle = GameObject.Find("FoxPowerParticle").GetComponent<ParticleSystem>();
                 powerParticle.transform.position = this.transform.position;
                 powerParticle.Play();
@@ -139,6 +139,10 @@ public class PlayerFoxMove : MonoBehaviour {
             Destroy(this.gameObject);
             GameMaster.GM.GameOver();
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (collision.gameObject.name == "Level End")
         {
             GameMaster.GM.Win();

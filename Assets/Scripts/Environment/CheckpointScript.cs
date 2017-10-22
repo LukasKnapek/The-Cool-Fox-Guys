@@ -35,10 +35,6 @@ public class CheckpointScript : MonoBehaviour {
             //playerFoxPower = powerBarFox.value;
             this.GetComponent<SpriteRenderer>().color = Color.green;
         }
-        else
-        {
-            this.GetComponent<SpriteRenderer>().color = Color.red;
-        }
 	}
 
     private void OnTriggerEnter2D(Collider2D other)

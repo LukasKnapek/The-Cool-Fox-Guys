@@ -14,7 +14,7 @@ public class GameMaster : MonoBehaviour
     public Text gameOverText;
     public Text restartText;
     public Camera mainCamera;
-    public AudioSource mainPlayer;
+    public static AudioSource mainPlayer;
     private Slider powerBarFox;
     private Slider powerBarWolf;
 
@@ -94,8 +94,6 @@ public class GameMaster : MonoBehaviour
     {
         if (Input.GetButtonDown("Restart"))
         {
-            Debug.Log(reached1);
-
             reached1 = checkPoint1.GetComponent<CheckpointScript>().isReached();
             reached2 = checkPoint2.GetComponent<CheckpointScript>().isReached();
             reached3 = checkPoint3.GetComponent<CheckpointScript>().isReached();
@@ -143,11 +141,11 @@ public class GameMaster : MonoBehaviour
 
         gameOverScreen.enabled = true;
         gameOverScreen.canvasRenderer.SetAlpha(0.0f);
-        gameOverScreen.CrossFadeAlpha(1.0f, 2.0f, true);
+        gameOverScreen.CrossFadeAlpha(1.0f, 1.5f, true);
 
         gameOverText.transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 1f);
         gameOverText.canvasRenderer.SetAlpha(0.0f);
-        gameOverText.CrossFadeAlpha(1.0f, 2.0f, true);
+        gameOverText.CrossFadeAlpha(1.0f, 1.5f, true);
 
         StartCoroutine(Defeat());
 
@@ -168,10 +166,9 @@ public class GameMaster : MonoBehaviour
 
     IEnumerator Defeat()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2f);
 
         SceneManager.LoadScene("GameOver");
-
     }
 
     IEnumerator Victory()
@@ -179,7 +176,5 @@ public class GameMaster : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
         SceneManager.LoadScene("Win");
-
-
     }
 }

@@ -131,20 +131,21 @@ public class PlayerWolfMove : MonoBehaviour
             }
             else
             {
-                powerBar.GetComponent<PowerBarWolf>().decreasePower(0.1f);
+                powerBar.GetComponent<PowerBarWolf>().decreasePower(0.12f);
                 powerParticle = GameObject.Find("WolfPowerParticle").GetComponent<ParticleSystem>();
                 powerParticle.transform.position = this.transform.position;
                 powerParticle.Play();
             }   
         }
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
         if (collision.gameObject.name == "Level End")
         {
             GameMaster.GM.Win();
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         if (collision.gameObject.tag == "Danger")
         {
             deathParticle.transform.position = this.transform.position;
