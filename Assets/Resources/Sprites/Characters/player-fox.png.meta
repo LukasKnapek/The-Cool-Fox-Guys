@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 6dc3c7e110c12e04d8310590ce589621
-timeCreated: 1508577180
+timeCreated: 1508666893
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -14,6 +14,16 @@ TextureImporter:
     21300014: player-fox_7
     21300016: player-fox_8
     21300018: player-fox_9
+    21300020: player-fox_10
+    21300022: player-fox_11
+    21300024: player-fox_12
+    21300026: player-fox_13
+    21300028: player-fox_14
+    21300030: player-fox_15
+    21300032: player-fox_16
+    21300034: player-fox_17
+    21300036: player-fox_18
+    21300038: player-fox_19
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -92,7 +102,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 120
+        y: 360
         width: 100
         height: 120
       alignment: 0
@@ -106,7 +116,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 100
-        y: 120
+        y: 360
         width: 100
         height: 120
       alignment: 0
@@ -120,7 +130,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 200
-        y: 120
+        y: 360
         width: 100
         height: 120
       alignment: 0
@@ -134,7 +144,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 300
-        y: 120
+        y: 360
         width: 100
         height: 120
       alignment: 0
@@ -148,7 +158,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 400
-        y: 120
+        y: 360
         width: 100
         height: 120
       alignment: 0
@@ -162,7 +172,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 240
         width: 100
         height: 120
       alignment: 0
@@ -176,7 +186,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 100
-        y: 0
+        y: 240
         width: 100
         height: 120
       alignment: 0
@@ -190,7 +200,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 200
-        y: 0
+        y: 240
         width: 100
         height: 120
       alignment: 0
@@ -204,7 +214,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 300
-        y: 0
+        y: 240
         width: 100
         height: 120
       alignment: 0
@@ -215,6 +225,146 @@ TextureImporter:
       tessellationDetail: 0
     - serializedVersion: 2
       name: player-fox_9
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 240
+        width: 100
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: player-fox_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 120
+        width: 100
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: player-fox_11
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 120
+        width: 100
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: player-fox_12
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 120
+        width: 100
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: player-fox_13
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 120
+        width: 100
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: player-fox_14
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 120
+        width: 100
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: player-fox_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 100
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: player-fox_16
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 100
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: player-fox_17
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 100
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: player-fox_18
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 100
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: player-fox_19
       rect:
         serializedVersion: 2
         x: 400
