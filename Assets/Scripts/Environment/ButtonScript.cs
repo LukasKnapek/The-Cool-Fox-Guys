@@ -23,7 +23,7 @@ public class ButtonScript : MonoBehaviour {
         controlledObjects = new List<GameObject>();
         foreach (string controlledObject in GM.ControlBindings[this.name])
         {
-            controlledObjects.Add(GameObject.Find("Environment").GetComponent<Transform>().Find(controlledObject).gameObject);
+            controlledObjects.Add(GameObject.Find(controlledObject).gameObject);
         }
     }
     // Update is called once per frame

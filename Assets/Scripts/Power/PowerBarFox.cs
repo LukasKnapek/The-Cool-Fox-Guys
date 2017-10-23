@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PowerBarFox : MonoBehaviour
-{
+public class PowerBarFox : MonoBehaviour {
+
     private float power = 1f;
 
     private void Awake()

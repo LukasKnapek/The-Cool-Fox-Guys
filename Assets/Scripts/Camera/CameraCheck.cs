@@ -8,7 +8,7 @@ public class CameraCheck : MonoBehaviour {
  
 	// Use this for initialization
 	void Start () {
-        mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
+        mainCamera = FindObjectOfType<Camera>();
     }
 	
 	// Update is called once per frame

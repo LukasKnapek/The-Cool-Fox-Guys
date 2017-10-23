@@ -15,11 +15,9 @@ public class GameMaster : MonoBehaviour
     public static Text restartText;
     public static Camera mainCamera;
     public static AudioSource mainPlayer;
-    private static Slider powerBarFox;
-    private static Slider powerBarWolf;
+    private static Slider powerBarFox, powerBarWolf;
 
-    private GameObject playerWolf;
-    private GameObject playerFox;
+    private GameObject playerWolf, playerFox;
 
     public static bool reached1;
     public static bool reached2;
@@ -33,19 +31,22 @@ public class GameMaster : MonoBehaviour
 
     public static bool hardMode;
 
+    enum State {Alive, GameOver, Victory};
+    State playerState;
+
     void Awake()
     {
-        playerWolf = GameObject.Find("PlayerWolf");
-        playerFox = GameObject.Find("PlayerFox");
+        playerFox = FindObjectOfType<PlayerFoxMove>().gameObject;
+        playerWolf = FindObjectOfType<PlayerWolfMove>().gameObject;
 
         checkPoint1 = GameObject.Find("CheckPoint1");
         checkPoint2 = GameObject.Find("CheckPoint2");
         checkPoint3 = GameObject.Find("CheckPoint3");
         checkPoint4 = GameObject.Find("CheckPoint4");
 
-        powerBarFox = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarFox").GetComponent<Slider>();
-        powerBarWolf = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarWolf").GetComponent<Slider>();
-        restartText = GameObject.Find("UI").GetComponent<Transform>().Find("RestartText").GetComponent<Text>();
+        powerBarFox = FindObjectOfType<PowerBarFox>().GetComponent<Slider>();
+        powerBarWolf = FindObjectOfType<PowerBarWolf>().GetComponent<Slider>();
+        restartText = GameObject.Find("RestartText").GetComponent<Text>();
 
         if (reached4)
         {
@@ -94,24 +95,23 @@ public class GameMaster : MonoBehaviour
             checkPoint3.transform.position = new Vector2(-200, -200);
             checkPoint4.transform.position = new Vector2(-200, -200);
         }
+
+        playerState = State.Alive;
     }
 
     private void Update()
     {
         if (Input.GetButtonDown("Restart") && restartText.enabled)
         {
-            
             reached1 = checkPoint1.GetComponent<CheckpointScript>().isReached();
             reached2 = checkPoint2.GetComponent<CheckpointScript>().isReached();
             reached3 = checkPoint3.GetComponent<CheckpointScript>().isReached();
             reached4 = checkPoint4.GetComponent<CheckpointScript>().isReached();
             
-            //CheckpointScript.foxBarValue = CheckpointScript.wolfBarValue = 1f;
             SceneManager.LoadScene("Level 1");
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
-            CheckpointScript.foxBarValue = CheckpointScript.wolfBarValue = 1f;
             SceneManager.LoadScene("Menu");
         }
 
@@ -134,43 +134,52 @@ public class GameMaster : MonoBehaviour
 
     public void GameOver()
     {
-        reached1 = checkPoint1.GetComponent<CheckpointScript>().isReached();
-        reached2 = checkPoint2.GetComponent<CheckpointScript>().isReached();
-        reached3 = checkPoint3.GetComponent<CheckpointScript>().isReached();
-        reached4 = checkPoint4.GetComponent<CheckpointScript>().isReached();
+        if (playerState != State.GameOver)
+        {
+            playerState = State.GameOver;
+            reached1 = checkPoint1.GetComponent<CheckpointScript>().isReached();
+            reached2 = checkPoint2.GetComponent<CheckpointScript>().isReached();
+            reached3 = checkPoint3.GetComponent<CheckpointScript>().isReached();
+            reached4 = checkPoint4.GetComponent<CheckpointScript>().isReached();
 
-        gameOverScreen = GameObject.Find("UI").GetComponent<Transform>().Find("GameOverScreen").GetComponent<Image>();
-        gameOverText = GameObject.Find("UI").GetComponent<Transform>().Find("GameOverText").GetComponent<Text>();
-        mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
+            gameOverScreen = GameObject.Find("GameOverScreen").GetComponent<Image>();
+            gameOverText = GameObject.Find("GameOverText").GetComponent<Text>();
+            mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
 
-        gameOverScreen.enabled = true;
-        gameOverScreen.canvasRenderer.SetAlpha(0.0f);
-        gameOverScreen.CrossFadeAlpha(1.0f, 1.5f, true);
+            gameOverScreen.enabled = true;
+            gameOverScreen.canvasRenderer.SetAlpha(0.0f);
+            gameOverScreen.CrossFadeAlpha(1.0f, 1.5f, true);
 
-        gameOverText.transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 1f);
-        gameOverText.canvasRenderer.SetAlpha(0.0f);
-        gameOverText.CrossFadeAlpha(1.0f, 1.5f, true);
+            gameOverText.transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 1f);
+            gameOverText.canvasRenderer.SetAlpha(0.0f);
+            gameOverText.CrossFadeAlpha(1.0f, 1.5f, true);
 
-        StartCoroutine(Defeat());
-
+            StartCoroutine(Defeat());
+        }
     }
 
     public void Win()
     {
-        mainPlayer.Stop();
-        winScreen = GameObject.Find("UI").GetComponent<Transform>().Find("WinScreen").GetComponent<Image>();
-        mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
+        if (playerState != State.Victory)
+        {
+            playerState = State.Victory;
+            mainPlayer.Stop();
+            winScreen = GameObject.Find("WinScreen").GetComponent<Image>();
+            mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
 
-        winScreen.enabled = true;
-        winScreen.canvasRenderer.SetAlpha(0.0f);
-        winScreen.CrossFadeAlpha(1.0f, 2.0f, true);
+            winScreen.enabled = true;
+            winScreen.canvasRenderer.SetAlpha(0.0f);
+            winScreen.CrossFadeAlpha(1.0f, 2.0f, true);
 
-        StartCoroutine(Victory());
+            StartCoroutine(Victory());
+        }
+        
     }
 
     IEnumerator Defeat()
     {
         yield return new WaitForSeconds(2f);
+        playerState = State.Alive;
 
         SceneManager.LoadScene("GameOver");
     }
@@ -178,6 +187,7 @@ public class GameMaster : MonoBehaviour
     IEnumerator Victory()
     {
         yield return new WaitForSeconds(2.5f);
+        playerState = State.Alive;
 
         SceneManager.LoadScene("Win");
     }

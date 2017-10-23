@@ -22,8 +22,8 @@ public class CheckpointScript : MonoBehaviour {
         playerFoxReached = false;
 
         checkpointPosition = this.gameObject.transform.position;
-        powerBarFox = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarFox").GetComponent<Slider>();
-        powerBarWolf = GameObject.Find("UI").GetComponent<Transform>().Find("PowerBarWolf").GetComponent<Slider>();
+        powerBarFox = FindObjectOfType<PowerBarFox>().GetComponent<Slider>();
+        powerBarWolf = FindObjectOfType<PowerBarWolf>().GetComponent<Slider>();
     }
 	
 	// Update is called once per frame
@@ -40,8 +40,8 @@ public class CheckpointScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "PlayerFox") playerFoxReached = true;
-        if (other.gameObject.name == "PlayerWolf") playerWolfReached = true;
+        if (other.GetComponent<PlayerFoxMove>()) playerFoxReached = true;
+        if (other.GetComponent<PlayerWolfMove>()) playerWolfReached = true;
     }
 
     public bool isReached()

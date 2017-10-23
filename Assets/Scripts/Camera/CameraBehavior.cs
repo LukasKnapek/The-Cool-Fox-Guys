@@ -19,7 +19,6 @@ public class CameraBehavior : MonoBehaviour {
 
     private Transform playerTransform;
     private Camera mainCamera;
-    private float yOffset = 0f;
     private bool canDecreaseSize;
 
     // Use this for initialization
@@ -38,8 +37,8 @@ public class CameraBehavior : MonoBehaviour {
         wolfUp = GameObject.Find("PlayerWolfUpCheck").GetComponent<SpriteRenderer>();
         wolfDown = GameObject.Find("PlayerWolfDownCheck").GetComponent<SpriteRenderer>();
 
-        playerFox = GameObject.Find("PlayerFox");
-        playerWolf = GameObject.Find("PlayerWolf");
+        playerFox = FindObjectOfType<PlayerFoxMove>().gameObject;
+        playerWolf = FindObjectOfType<PlayerWolfMove>().gameObject;
 
         playerTransform = playerFox.GetComponent<Transform>();
         canDecreaseSize = true;
@@ -67,7 +66,5 @@ public class CameraBehavior : MonoBehaviour {
                 }
             }
         }
-        
     }
-
 }
